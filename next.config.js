@@ -3,8 +3,9 @@ module.exports = {
   images: {
     domains: ['firebasestorage.googleapis.com'],
   },
-
-
+  experimental: {
+    runtime: 'experimental-edge',
+  },
     devIndicators: {
       autoPrerender: false,
     },

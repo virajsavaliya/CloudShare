@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+body{
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.Herosection {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Light mode styles */
+@media (prefers-color-scheme: light) {
+  .light-mode-label {
+    /* Add light mode specific styles here */
+    background-color: #f3f4f6;
+    border-color: #cbd5e0;
+    color: #4a5568;
+  }
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .dark-mode-label {
+    /* Add dark mode specific styles here */
+    background-color: #4a5568;
+    border-color: #2d3748;
+    color: #cbd5e0;
+  }
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+
+
+/* Add this CSS code to your global CSS file or inside a style tag in your component */
+
+@keyframes rotateCircle {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: rotate(180deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes showCheckmark {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.circle {
+  display: inline-block;
+  border: 2px solid blue;
+  border-radius: 50%;
+  padding: 3px;
+  animation: rotateCircle 1s ease-in-out;
+}
+
+.checkmark {
+  color: blue;
+  font-size: 1.0em;
+  animation: showCheckmark 0.5s ease-in-out;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+

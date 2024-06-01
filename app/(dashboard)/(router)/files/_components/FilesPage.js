@@ -9,7 +9,6 @@ function FilesPage() {
   const { user } = useUser();
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const baseUrl = "https://cloud-share-one.vercel.app";
 
   const fetchFiles = useCallback(async () => {
     try {
@@ -68,6 +67,7 @@ function FilesPage() {
             <li>
               <Link href="/" className="block transition hover:text-gray-700">
                 <span className="sr-only"> Home </span>
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4"
@@ -162,8 +162,8 @@ function FilesPage() {
                   <td className="p-3 md:p-6 border-b">{(file.fileSize / 1024 / 1024).toFixed(2)} MB</td>
                   <td className="p-3 md:p-6 border-b">{file.fileType}</td>
                   <td className="p-3 md:p-6 border-b">
-                    <a href={`${baseUrl}${file.shortUrl}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                      {`${baseUrl}${file.shortUrl}`}
+                    <a href={file.shortUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                      {file.shortUrl}
                     </a>
                   </td>
                   <td className="p-3 md:p-6 border-b text-center">

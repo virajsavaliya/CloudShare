@@ -39,4 +39,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Link Which use in development 
 
 [text](https://www.hyperui.dev/)
-[text](https://dashboard.clerk.com/apps/app_2gSby0jF0uTKzfoQNyWjjJYmwPx/instances/ins_2gSby4C1LtgyB4LEgbDHQgoSM5z)
+[text](https://clerk.com/)
+[text](https://resend.com/)
+[text](https://vercel.com/)

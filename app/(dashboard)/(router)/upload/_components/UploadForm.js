@@ -31,10 +31,7 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
     'application/msaccess', 
     'application/vnd.ms-project', 
     'application/vnd.visio' 
-];
-
-
-
+  ];
 
   const onFileSelect = (file) => {
     if (file && !allowedFileTypes.includes(file.type)) {
@@ -63,7 +60,7 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
         whileTap={{ scale: 0.95 }}
         className="flex flex-col items-center justify-center w-full md:w-1/2 h-64 border-2 border-blue-300 border-dashed rounded-lg cursor-pointer bg-blue-50 hover:bg-gray-100 transition duration-300"
       >
-        <div className="flex flex-col items-center justify-center pt-5 pb-6">
+        <div className="flex flex-col items-center justify-center pt-5 pb-6 text-center">
           <svg
             className="w-12 h-12 mb-4 text-blue-500"
             aria-hidden="true"
@@ -98,7 +95,7 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
         />
       </motion.label>
       <div className="w-full md:w-1/2 flex flex-col items-center border border-gray-300 rounded-lg p-4 bg-white shadow-md h-64">
-        <h2 className="text-xl font-semibold mb-1 ">Preview</h2>
+        <h2 className="text-xl font-semibold mb-1 text-center">Preview</h2>
         <hr className="border-b-2 border-gray-300 w-16 mx-auto mb-4" />
         {errorMsg && <AlertMsg msg={errorMsg} />}
         {file ? (
@@ -118,7 +115,7 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
             {isUploading && <ProgressBar progress={progress} />}
           </>
         ) : (
-          <p className="text-gray-500">No file selected</p>
+          <p className="text-gray-500 text-center">No file selected</p>
         )}
       </div>
     </div>

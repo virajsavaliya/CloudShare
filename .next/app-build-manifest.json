@@ -30,11 +30,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/(router)/file-preview/[fileId]/page.js"
-    ],
-    "/f/[fileId]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/f/[fileId]/page.js"
     ]
   }
 }

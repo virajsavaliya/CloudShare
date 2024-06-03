@@ -7,6 +7,8 @@ import {
   FaPaperPlane,
   FaShieldAlt,
 } from "react-icons/fa";
+import Footer from "./Footer";
+
 
 function Hero() {
   const BackgroundIcons = () => {
@@ -135,9 +137,7 @@ function Hero() {
     <div>
       <Herosection />
       <Feturesection />
-      <div className="text-center bg-black text-white">
-        <a>Copyright ©2024 All rights reserved | CloudShare | vmsmywebsite.web.app</a>
-      </div>
+      <Footer/>
     </div>
   );
 }

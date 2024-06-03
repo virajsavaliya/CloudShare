@@ -1,7 +1,7 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
-  "/(dashboard)/(router)/files/page": "app/(dashboard)/(router)/files/page.js",
-  "/(dashboard)/(router)/file-preview/[fileId]/page": "app/(dashboard)/(router)/file-preview/[fileId]/page.js",
-  "/(dashboard)/(router)/upload/page": "app/(dashboard)/(router)/upload/page.js",
-  "/(dashboard)/(router)/upgrade/page": "app/(dashboard)/(router)/upgrade/page.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/(auth)/(routes)/sign-in/[[...sign-in]]/page": "app/(auth)/(routes)/sign-in/[[...sign-in]]/page.js",
+  "/(dashboard)/(router)/files/page": "app/(dashboard)/(router)/files/page.js"
 }

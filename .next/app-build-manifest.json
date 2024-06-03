@@ -21,20 +21,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/layout.js"
     ],
-    "/(dashboard)/(router)/upload/page": [
+    "/(auth)/(routes)/sign-in/[[...sign-in]]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/(router)/upload/page.js"
+      "static/chunks/app/(auth)/(routes)/sign-in/[[...sign-in]]/page.js"
     ],
-    "/(dashboard)/(router)/file-preview/[fileId]/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/(router)/file-preview/[fileId]/page.js"
-    ],
-    "/(dashboard)/(router)/upgrade/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/(router)/upgrade/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

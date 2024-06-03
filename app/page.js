@@ -1,6 +1,5 @@
 import Header from "./_components/Header";
 import Hero from "./_components/Hero";
-import Footer from "./_components/footer";
 
 
 export default function Home() {
@@ -8,7 +7,7 @@ export default function Home() {
     <div>
     <Header/>
     <Hero/>
-    <Footer/>
+    
     </div>
   );
 }

@@ -1,5 +1,5 @@
 "use client"
-import { File, Shield, Upload } from 'lucide-react'
+import { File, Home, Shield, Upload } from 'lucide-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -10,7 +10,7 @@ function SideNav() {
         {
             id: 1,
             name: 'Home',
-            icon: Home,
+            icon: Home  ,
             path: '/'
         },
         {

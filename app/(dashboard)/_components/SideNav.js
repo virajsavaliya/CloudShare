@@ -9,22 +9,28 @@ function SideNav() {
     const menuList = [
         {
             id: 1,
+            name: 'Home',
+            icon: Home,
+            path: '/'
+        },
+        {
+            id: 2,
             name: 'Files',
             icon: File,
             path: '/files'
         },
         {
-            id: 2,
+            id: 3,
             name: 'Upload',
             icon: Upload,
             path: '/upload'
         },
         {
-            id: 3,
+            id: 4,
             name: 'Upgrade',
             icon: Shield,
             path: '/upgrade'
-        },
+        }
     ]
 
     const [activeIndex, setActiveIndex] = useState(-1);
@@ -37,7 +43,7 @@ function SideNav() {
         if (currentIndex !== -1) {
             setActiveIndex(currentIndex);
         }
-    }, [router.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [router.pathname]);
 
     const handleNavigation = (index, path) => {
         setActiveIndex(index);

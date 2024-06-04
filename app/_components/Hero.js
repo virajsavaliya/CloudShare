@@ -6,8 +6,7 @@ import {
   FaLock,
   FaPaperPlane,
   FaShieldAlt,
-} from "react-icons/fa";;
-
+} from "react-icons/fa";
 
 function Hero() {
   const BackgroundIcons = () => {
@@ -19,7 +18,7 @@ function Hero() {
       "text-purple-500",
     ];
     return (
-      <div className="absolute inset-0 pointer-events-none z-0">
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         {Array.from({ length: 20 }).map((_, index) => {
           const Icon = icons[index % icons.length];
           const color = colors[index % colors.length];
@@ -45,38 +44,37 @@ function Hero() {
 
   const Herosection = () => {
     return (
-      <section className="relative bg-gray-50 h-screen">
-      <BackgroundIcons /> 
-      <div className="mx-auto max-w-screen-xl px-4 py-32 pt-22 lg:flex h-full">
+      <section className="relative bg-gray-50 h-screen overflow-hidden">
+        <BackgroundIcons /> 
+        <div className="mx-auto max-w-screen-xl px-4 py-32 pt-22 lg:flex h-full">
           <div className="mx-auto max-w-xl text-center">
-              <h1 className="text-3xl font-extrabold sm:text-5xl">
-                  <span className="text-primary">Upload, Save </span> and easily{" "}
-                  <span className="text-primary">Share</span> your files in one
-                  place
-              </h1>
-              <p className="mt-4 sm:text-xl/relaxed text-gray-500">
-                  {Constant.desc}
-              </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-4">
-                  <a
-                      className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow 
-                      hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
-                      href="/files"
-                  >
-                      Get Started
-                  </a>
-                  <a
-                      className="block w-full bg-primary rounded px-12 py-3 text-sm font-medium text-white shadow 
-                      hover:bg-blue-700 focus:outline-none focus:ring active:text-blue-600 sm:w-auto"
-                      href="#Feature-section"
-                  >
-                      Features
-                  </a>
-              </div>
+            <h1 className="text-3xl font-extrabold sm:text-5xl">
+              <span className="text-primary">Upload, Save </span> and easily{" "}
+              <span className="text-primary">Share</span> your files in one
+              place
+            </h1>
+            <p className="mt-4 sm:text-xl/relaxed text-gray-500">
+              {Constant.desc}
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <a
+                className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow 
+                hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+                href="/files"
+              >
+                Get Started
+              </a>
+              <a
+                className="block w-full bg-primary rounded px-12 py-3 text-sm font-medium text-white shadow 
+                hover:bg-blue-700 focus:outline-none focus:ring active:text-blue-600 sm:w-auto"
+                href="#Feature-section"
+              >
+                Features
+              </a>
+            </div>
           </div>
-      </div>
-  </section>
-  
+        </div>
+      </section>
     );
   };
 
@@ -84,7 +82,7 @@ function Hero() {
     return (
       <section
         id="Feature-section"
-        className="py-8 sm:py-12 lg:py-16 bg-gray-100 "
+        className="py-8 sm:py-12 lg:py-16 bg-gray-100 overflow-hidden"
       >
         <div>
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8">
@@ -137,15 +135,15 @@ function Hero() {
       <Herosection />
       <Feturesection />
       <footer className="bg-gray-700 text-white py-4">
-    <div className="container mx-auto text-center">
-      <p className="text-sm">
-        Copyright © 2024 All rights reserved | CloudShare |{" "}
-        <a href="https://viraj-savaliya.web.app" className="">
-          viraj-savaliya.web.app
-        </a>
-      </p>
-    </div>
-  </footer>
+        <div className="container mx-auto text-center">
+          <p className="text-sm">
+            Copyright © 2024 All rights reserved | CloudShare |{" "}
+            <a href="https://viraj-savaliya.web.app" className="">
+              viraj-savaliya.web.app
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

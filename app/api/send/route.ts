@@ -16,7 +16,7 @@ export async function POST(req) {
   const response = await req.json();
   try {
     const mailOptions = {
-      from: 'savaliyaviraj5@gmail.com',
+      from: 'cloudsharing.fileshare@gmail.com',
       to: response.emailToSend,
       subject: `${response.userName} shared a file with you`,
       html: EmailTemplate({ response }),

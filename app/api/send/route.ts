@@ -1,33 +1,30 @@
+//router.ts
 import { NextResponse } from 'next/server';
 import { EmailTemplate } from '../../_components/email-template';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
+  },
+});
 
 export async function POST(req) {
-    const responce=await req.json();
+  const response = await req.json();
   try {
-    const { name, email, phone, message } = req.body;
-    const data = await resend.emails.send({
-      
-      from: 'cloudshare@resend.dev',
-      to: ['savaliyaviraj5@gmail.com'],
-      subject: responce?.userName+" Share File with You",
-      react: EmailTemplate({responce}),
-    });
+    const mailOptions = {
+      from: 'savaliyaviraj5@gmail.com',
+      to: response.emailToSend,
+      subject: `${response.userName} shared a file with you`,
+      html: EmailTemplate({ response }),
+    };
 
-
-    
-
-
-    
-
-    return NextResponse.json(data)
-  }catch (error){
-    return NextResponse.json({error});
+    const info = await transporter.sendMail(mailOptions);
+    return NextResponse.json(info);
+  } catch (error) {
+    return NextResponse.json({ error: error.message });
   }
-    
 }
-
-

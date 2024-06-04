@@ -141,7 +141,7 @@ function Hero() {
       <p className="text-sm">
         Copyright © 2024 All rights reserved | CloudShare |{" "}
         <a href="https://viraj-savaliya.web.app" className="">
-          vmsmywebsite.web.app
+          viraj-savaliya.web.app
         </a>
       </p>
     </div>

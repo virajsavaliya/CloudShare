@@ -9,7 +9,6 @@ import {
 import React, { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import FilesPage from './_components/FilesPage';
-import { ClipLoader } from "react-spinners";
 
 function Files() {
   const { isLoaded, userId } = useAuth();

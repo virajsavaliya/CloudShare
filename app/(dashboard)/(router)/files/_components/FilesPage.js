@@ -1,7 +1,14 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { db } from "../../../../../firebaseConfig";
-import { collection, getDocs, query, where, deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import Link from "next/link";
 import { ClipLoader } from "react-spinners";
 
@@ -10,10 +17,19 @@ function FilesPage() {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchFiles = useCallback(async () => {
+  useEffect(() => {
+    if (user) {
+      fetchFiles();
+    }
+  }, [user]);
+
+  const fetchFiles = async () => {
     try {
       const filesRef = collection(db, "uploadedFile");
-      const q = query(filesRef, where("userEmail", "==", user?.primaryEmailAddress.emailAddress));
+      const q = query(
+        filesRef,
+        where("userEmail", "==", user?.primaryEmailAddress.emailAddress)
+      );
       const querySnapshot = await getDocs(q);
 
       const userFiles = querySnapshot.docs.map((doc) => ({
@@ -27,28 +43,26 @@ function FilesPage() {
       console.error("Error fetching files:", error);
       setLoading(false);
     }
-  }, [user]);
-
-  useEffect(() => {
-    if (user) {
-      fetchFiles();
-    }
-  }, [user, fetchFiles]);
+  };
 
   const removeFile = async (fileId) => {
     try {
       // Optimistically update the state
       setFiles((files) => files.filter((file) => file.id !== fileId));
-      
+
       // Send request to Firestore to delete the document
       await deleteDoc(doc(db, "uploadedFile", fileId));
-      
+
       console.log("File removed successfully");
     } catch (error) {
       // If an error occurs, revert the state back to its previous value
       setFiles((prevFiles) => prevFiles);
       console.error("Error removing file:", error);
     }
+  };
+
+  const openFileInNewTab = (fileUrl) => {
+    window.open(fileUrl, "_blank");
   };
 
   if (loading) {
@@ -101,7 +115,13 @@ function FilesPage() {
             </li>
 
             <li>
-              <Link href="/upload" className="block transition hover:text-gray-700"> Upload </Link>
+              <Link
+                href="/upload"
+                className="block transition hover:text-gray-700"
+              >
+                {" "}
+                Upload{" "}
+              </Link>
             </li>
 
             <li className="rtl:rotate-180">
@@ -120,7 +140,10 @@ function FilesPage() {
             </li>
 
             <li>
-              <a href="#" className="block transition hover:text-gray-700"> Files </a>
+              <a href="#" className="block transition hover:text-gray-700">
+                {" "}
+                Files{" "}
+              </a>
             </li>
           </ol>
         </nav>
@@ -137,50 +160,129 @@ function FilesPage() {
     );
   };
 
+  const Tables = () => {
+    return (
+      <div className="overflow-x-auto">
+        <div className="hidden md:block">
+          <table className="w-full bg-white border border-gray-300 rounded-lg shadow min-w-[600px]">
+            <thead>
+              <tr>
+                <th className="p-3 md:p-6 bg-gray-100 border-b text-center">
+                  No.
+                </th>
+                <th className="p-3 md:p-6 bg-gray-100 border-b text-center">
+                  File Name
+                </th>
+                <th className="p-3 md:p-6 bg-gray-100 border-b text-center">
+                  File Size
+                </th>
+                <th className="p-3 md:p-6 bg-gray-100 border-b text-center">
+                  File Type
+                </th>
+                <th className="p-3 md:p-6 bg-gray-100 border-b text-center">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {files.length > 0 ? (
+                files.map((file, index) => (
+                  <tr key={file.id} className="hover:bg-gray-50">
+                    <td className="p-3 md:p-6 border-b text-center">
+                      {file.id}
+                    </td>
+                    <td className="p-3 md:p-6 border-b text-center overflow-hidden text-ellipsis whitespace-nowrap max-w-[200px]">
+                      {file.fileName}
+                    </td>
+                    <td className="p-3 md:p-6 border-b text-center">
+                      {(file.fileSize / 1024 / 1024).toFixed(2)} MB
+                    </td>
+                    <td className="p-3 md:p-6 border-b text-center">
+                      {file.fileType}
+                    </td>
+                    <td className="p-3 md:p-6 border-b text-center">
+                      <button
+                        onClick={() => openFileInNewTab(file.fileUrl)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mr-4"
+                      >
+                        Open
+                      </button>
+                      <button
+                        onClick={() => removeFile(file.id)}
+                        className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="p-3 md:p-6 border-b text-center">
+                    No files found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+        <div className="block md:hidden">
+          {files.length > 0 ? (
+            files.map((file, index) => (
+              <div
+                key={file.id}
+                className="border border-gray-300 rounded-lg p-4 mb-4 shadow"
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <span className="font-semibold">
+                    #{index + 1} {file.id}
+                  </span>
+                  <span className="flex space-x-2">
+                    <button
+                      onClick={() => openFileInNewTab(file.fileUrl)}
+                      className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+                    >
+                      Open
+                    </button>
+                    <button
+                      onClick={() => removeFile(file.id)}
+                      className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+                    >
+                      Remove
+                    </button>
+                  </span>
+                </div>
+                <div className="mb-2">
+                  <p className="font-semibold">File Name:</p>
+                  <p className="overflow-hidden text-ellipsis whitespace-nowrap">
+                    {file.fileName}
+                  </p>
+                </div>
+                <div className="flex justify-between mb-2">
+                  <div>
+                    <p className="font-semibold">File Size:</p>
+                    <p>{(file.fileSize / 1024 / 1024).toFixed(2)} MB</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">File Type:</p>
+                    <p>{file.fileType}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center">No files found</p>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="p-5 px-8 md:px-8">
       <NavLocation />
       <FilesTitle />
-      <div className="overflow-x-auto">
-        <table className="w-full bg-white border border-gray-300 rounded-lg shadow min-w-[600px]">
-          <thead>
-            <tr>
-              <th className="p-3 md:p-6 bg-gray-100 border-b">File ID</th>
-              <th className="p-3 md:p-6 bg-gray-100 border-b">File Name</th>
-              <th className="p-3 md:p-6 bg-gray-100 border-b">File Size</th>
-              <th className="p-3 md:p-6 bg-gray-100 border-b">File Type</th>
-              <th className="p-3 md:p-6 bg-gray-100 border-b">Short URL</th>
-              <th className="p-3 md:p-6 bg-gray-100 border-b">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {files.length > 0 ? (
-              files.map((file) => (
-                <tr key={file.id} className="hover:bg-gray-50">
-                  <td className="p-3 md:p-6 border-b">{file.id}</td>
-                  <td className="p-3 md:p-6 border-b overflow-hidden text-ellipsis whitespace-nowrap max-w-[200px]">{file.fileName}</td>
-                  <td className="p-3 md:p-6 border-b">{(file.fileSize / 1024 / 1024).toFixed(2)} MB</td>
-                  <td className="p-3 md:p-6 border-b">{file.fileType}</td>
-                  <td className="p-3 md:p-6 border-b">
-                    <a href={file.shortUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                      {file.shortUrl}
-                    </a>
-                  </td>
-                  <td className="p-3 md:p-6 border-b text-center">
-                    <button onClick={() => removeFile(file.id)} className="text-red-500 hover:text-red-700">
-                      Remove
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6" className="p-3 md:p-6 border-b text-center">No files found</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      <Tables />
     </div>
   );
 }

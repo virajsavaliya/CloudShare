@@ -46,7 +46,19 @@ body{
   }
 }
 
+.bg-pattern {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
+button {
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
 
 /* Add this CSS code to your global CSS file or inside a style tag in your component */

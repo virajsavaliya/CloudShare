@@ -1,6 +1,6 @@
 "use client"
-import React, { useState, useEffect } from 'react';
 
+import React, { useState, useEffect } from 'react';
 import SideNav from './_components/SideNav';
 import TopHeader from './_components/TopHeader';
 import Footer from '../_components/Footer';
@@ -22,15 +22,16 @@ function Layout({ children }) {
   }, []); // Empty dependency array to run the effect only once on initial render
 
   return (
-    <div>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <div className='h-full md:w-64 flex-col fixed inset-y-0 z-50 md:flex hidden'>
         <SideNav/>
       </div>
-      <div className='md:ml-64'>
-        <TopHeader className="flex-1"/>
+      <div className='md:ml-64' style={{ flex: '1' }}>
+        <TopHeader />
         {children}
       </div>
       {isSmallScreen && <Footer />} {/* Render footer only on small screens */}
+      {!isSmallScreen && <Footer style={{ marginTop: 'auto' }} />} {/* Render footer at the bottom */}
     </div>
   );
 }

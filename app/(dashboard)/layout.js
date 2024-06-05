@@ -31,7 +31,6 @@ function Layout({ children }) {
         {children}
       </div>
       {isSmallScreen && <Footer />} {/* Render footer only on small screens */}
-      {!isSmallScreen && <Footer style={{ marginTop: 'auto' }} />} {/* Render footer at the bottom */}
     </div>
   );
 }

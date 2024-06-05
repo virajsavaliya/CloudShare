@@ -1,6 +1,7 @@
 import React from "react";
 import Constant from "../_utils/Constant";
 import { FaPaperPlane, FaLock, FaShieldAlt } from "react-icons/fa";
+import Footer from "./Footer";
 
 function Hero() {
   const Herosection = () => {
@@ -81,6 +82,7 @@ function Hero() {
     <div className="overflow-x-hidden">
       <Herosection />
       <Feturesection />
+      <Footer/>
     </div>
   );
 }

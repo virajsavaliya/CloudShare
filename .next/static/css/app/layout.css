@@ -959,6 +959,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
 .object-contain {
   object-fit: contain;
 }
@@ -1611,6 +1615,10 @@ body{
 
   .lg\:col-span-7 {
     grid-column: span 7 / span 7;
+  }
+
+  .lg\:mr-9 {
+    margin-right: 2.25rem;
   }
 
   .lg\:block {

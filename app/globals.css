@@ -13,6 +13,114 @@ body{
   display: none;
 }
 
+
+
+/* -------------------------------------------------------------------- */
+/* -------------------------------------------------------------------- */
+.fixed {
+  position: fixed;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.left-0 {
+  left: 0;
+}
+.right-0 {
+  right: 0;
+}
+.p-4 {
+  padding: 1rem;
+}
+.bg-gray-800 {
+  background-color: #2d3748;
+}
+.text-white {
+  color: #ffffff;
+}
+.flex {
+  display: flex;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.items-center {
+  align-items: center;
+}
+.bg-blue-500 {
+  background-color: #4299e1;
+}
+.bg-red-500 {
+  background-color: #f56565;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.rounded {
+  border-radius: 0.25rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+}
+.z-50 {
+  z-index: 50;
+}
+
+/* styles/globals.css */
+.cookie-consent-popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background-color: #2d3748;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 50;
+}
+
+.cookie-consent-popup div {
+  text-align: center;
+}
+
+.cookie-consent-popup button {
+  background-color: #4299e1;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.cookie-consent-popup button:nth-child(2) {
+  background-color: #f56565;
+}
+
+@media (min-width: 768px) {
+  .cookie-consent-popup {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .cookie-consent-popup div {
+    text-align: left;
+  }
+
+  .cookie-consent-popup button {
+    margin: 0 0.5rem;
+  }
+}
+
+/* -------------------------------------------------------------------- */
+
 /* Hide scrollbar for IE, Edge and Firefox */
 .Herosection {
   -ms-overflow-style: none;  /* IE and Edge */

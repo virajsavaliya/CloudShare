@@ -90,7 +90,7 @@ export function EmailTemplate({ response }) {
             <div class="paragraph">The CloudShare Team</div>
           </div>
           <div class="footer">
-            Copyright ©2024 All rights reserved | CloudShare | vmsmywebsite.web.app
+            Copyright ©2024 All rights reserved | CloudShare | viraj-savaliya.web.app
           </div>
         </div>
       </body>

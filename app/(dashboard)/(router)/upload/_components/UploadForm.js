@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 function UploadForm({ uploadBtnClick, isUploading, progress }) {
   const [file, setFile] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef();
 
   const allowedFileTypes = [
@@ -45,14 +46,42 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
     setErrorMsg(null);
     setFile(file);
   };
+    
 
   const removeFile = () => {
     setFile(null);
     fileInputRef.current.value = null;
   };
 
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setDragOver(true);
+  };
+
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    setDragOver(true);
+  };
+
+  const handleDragLeave = () => {
+    setDragOver(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragOver(false);
+    const droppedFile = e.dataTransfer.files[0];
+    onFileSelect(droppedFile);
+  };
+
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center w-full space-y-4 md:space-y-0 md:space-x-4">
+    <div 
+      className={`flex flex-col md:flex-row items-center justify-center w-full space-y-4 md:space-y-0 md:space-x-4 ${dragOver ? 'border-blue-500' : ''}`}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      onDragEnter={handleDragEnter}
+      onDragLeave={handleDragLeave}
+    >
       <motion.label
         htmlFor="dropzone-file"
         initial={{ scale: 1 }}

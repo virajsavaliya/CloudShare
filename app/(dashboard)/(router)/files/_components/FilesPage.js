@@ -37,15 +37,14 @@ function FilesPage() {
 
   const removeFile = async (fileId) => {
     try {
-      // Optimistically update the state
       setFiles(files => files.filter((file) => file.id !== fileId));
       
-      // Send request to Firestore to delete the document
+      
       await deleteDoc(doc(db, "uploadedFile", fileId));
       
       console.log("File removed successfully");
     } catch (error) {
-      // If an error occurs, revert the state back to its previous value
+      
       setFiles(prevFiles => prevFiles);
       console.error("Error removing file:", error);
     }
@@ -142,6 +141,34 @@ function FilesPage() {
   };
 
   const Tables = () => {
+    const shortenFileType = (fileType) => {
+      const fileTypeMap = {
+        "image/jpeg": ".jpeg",
+        "image/png": ".png",
+        "image/svg+xml": ".svg",
+        "image/gif" : ".gif",
+        "application/pdf": ".pdf",
+        "application/zip": "zip",
+        "application/x-rar-compressed": "zip",
+        "application/x-7z-compressed": "zip",
+        "application/x-tar": "zip",
+        "application/x-gzip": "zip",
+        "application/x-zip-compressed": "zip",
+        // MS Office documents
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document": ".docx",
+        "application/msword": ".doc",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": ".csv",
+        "application/vnd.ms-excel": ".csv",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation": ".ppt",
+        "application/vnd.ms-powerpoint": ".ppt",
+        "application/msaccess": ".accda",
+        "application/vnd.ms-project": ".mpp",
+        "application/vnd.visio": ".vsdx",        
+      };
+  
+      return fileTypeMap[fileType] || fileType;
+    };
+  
     return (
       <div className="overflow-x-auto">
         <div className="hidden md:block">
@@ -162,7 +189,7 @@ function FilesPage() {
                     <td className="p-3 md:p-6 border-b text-center">{file.id}</td>
                     <td className="p-3 md:p-6 border-b text-center overflow-hidden text-ellipsis whitespace-nowrap max-w-[200px]">{file.fileName}</td>
                     <td className="p-3 md:p-6 border-b text-center">{(file.fileSize / 1024 / 1024).toFixed(2)} MB</td>
-                    <td className="p-3 md:p-6 border-b text-center">{file.fileType}</td>
+                    <td className="p-3 md:p-6 border-b text-center">{shortenFileType(file.fileType)}</td>
                     <td className="p-3 md:p-6 border-b text-center">
                       <button onClick={() => openFileInNewTab(file.fileUrl)} className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mr-4">
                         Open
@@ -207,7 +234,7 @@ function FilesPage() {
                   </div>
                   <div>
                     <p className="font-semibold">File Type:</p>
-                    <p>{file.fileType}</p>
+                    <p>{shortenFileType(file.fileType)}</p>
                   </div>
                 </div>
               </div>
@@ -219,6 +246,7 @@ function FilesPage() {
       </div>
     );
   };
+  
 
   return (
     <div className="p-5 px-8 md:px-8">

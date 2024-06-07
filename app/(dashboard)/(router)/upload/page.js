@@ -13,12 +13,11 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { generateRandomString } from "../../../_utils/GenerateRandomString";
 import { app } from "../../../../firebaseConfig";
-import { FaFileUpload, FaShieldAlt } from "react-icons/fa";
 
 function Upload() {
   const NavLocation = () => {
     return (
-      <div className="hidden md:block">
+      <div className="md:block">
 
         <nav aria-label="Breadcrumb">
           <ol class="flex items-center gap-1 text-sm text-gray-600">

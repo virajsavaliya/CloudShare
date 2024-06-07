@@ -1,5 +1,5 @@
-"use client"
-import React, { useEffect, useState, useCallback } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { db } from "../../../../../firebaseConfig";
 import {
@@ -12,13 +12,20 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { ClipLoader } from "react-spinners";
+import Link from "next/link";
 
 function Recycle() {
   const { user } = useUser();
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchFiles = useCallback(async () => {
+  useEffect(() => {
+    if (user) {
+      fetchFiles();
+    }
+  }, [user]);
+
+  const fetchFiles = async () => {
     try {
       const recycleBinRef = collection(db, "recycleBin");
       const q = query(
@@ -38,13 +45,7 @@ function Recycle() {
       console.error("Error fetching files:", error);
       setLoading(false);
     }
-  }, [user]);
-
-  useEffect(() => {
-    if (user) {
-      fetchFiles();
-    }
-  }, [user, fetchFiles]);
+  };
 
   const recoverFile = async (file) => {
     try {
@@ -57,7 +58,7 @@ function Recycle() {
       await deleteDoc(doc(db, "recycleBin", file.id));
 
       // Update state to reflect recovery
-      setFiles((prevFiles) => prevFiles.filter((f) => f.id !== file.id));
+      setFiles((files) => files.filter((f) => f.id !== file.id));
 
       console.log("File recovered successfully");
     } catch (error) {
@@ -71,7 +72,7 @@ function Recycle() {
       await deleteDoc(doc(db, "recycleBin", fileId));
 
       // Update state to reflect deletion
-      setFiles((prevFiles) => prevFiles.filter((file) => file.id !== fileId));
+      setFiles((files) => files.filter((file) => file.id !== fileId));
 
       console.log("File deleted permanently");
     } catch (error) {
@@ -86,6 +87,78 @@ function Recycle() {
       </div>
     );
   }
+    const NavLocation = () => {
+    return (
+      <div className="md:block">
+        <nav aria-label="Breadcrumb">
+          <ol className="flex items-center gap-1 text-sm text-gray-600">
+            <li>
+              <Link href="/" className="block transition hover:text-gray-700">
+                <span className="sr-only"> Home </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  />
+                </svg>
+              </Link>
+            </li>
+            <li className="rtl:rotate-180">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </li>
+            <li>
+              <Link
+                href="/upload"
+                className="block transition hover:text-gray-700"
+              >
+                {" "}
+                Upload{" "}
+              </Link>
+            </li>
+            <li className="rtl:rotate-180">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </li>
+            <li>
+              <a href="/recycle" className="block transition hover:text-gray-700">
+                {" "}
+                Recycle{" "}
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    );
+  };
 
   const RecycleBinTitle = () => {
     return (
@@ -249,6 +322,7 @@ function Recycle() {
 
   return (
     <div className="p-5 px-8 md:px-8">
+      <NavLocation/>
       <RecycleBinTitle />
       <Tables />
     </div>

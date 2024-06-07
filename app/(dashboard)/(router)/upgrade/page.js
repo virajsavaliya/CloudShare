@@ -8,7 +8,7 @@ function Upgrade() {
 
   const NavLocation = () => {
     return (
-      <div className="hidden md:block">
+      <div className="md:block">
         <nav aria-label="Breadcrumb">
           <ol className="flex items-center gap-1 text-sm text-gray-600">
             <li>

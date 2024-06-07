@@ -1,11 +1,11 @@
 import { File, Home, Recycle, Shield, Upload } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
 
 function SideNav() {
-  const menuList = [
+  const menuList = useMemo(() => [
     {
       id: 1,
       name: "Home",
@@ -36,7 +36,7 @@ function SideNav() {
       icon: Recycle,
       path: "/recycle",
     },
-  ];
+  ], []);
 
   const [activeIndex, setActiveIndex] = useState(-1);
   const router = useRouter();
@@ -50,7 +50,7 @@ function SideNav() {
     if (currentIndex !== -1) {
       setActiveIndex(currentIndex);
     }
-  }, [router.pathname]); // Removed menuList from dependency array
+  }, [router.pathname, menuList]);
 
   const handleNavigation = (index, path) => {
     setActiveIndex(index);

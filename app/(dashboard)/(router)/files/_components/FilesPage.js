@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useUser } from "@clerk/nextjs";
 import { db } from "../../../../../firebaseConfig";
 import {
@@ -18,13 +18,7 @@ function FilesPage() {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (user) {
-      fetchFiles();
-    }
-  }, [user]);
-
-  const fetchFiles = async () => {
+  const fetchFiles = useCallback(async () => {
     try {
       const filesRef = collection(db, "uploadedFile");
       const q = query(
@@ -44,7 +38,13 @@ function FilesPage() {
       console.error("Error fetching files:", error);
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      fetchFiles();
+    }
+  }, [user, fetchFiles]);
 
   const removeFile = async (file) => {
     try {
@@ -78,7 +78,6 @@ function FilesPage() {
     );
   }
 
-
   const NavLocation = () => {
     return (
       <div className="hidden md:block">
@@ -87,7 +86,6 @@ function FilesPage() {
             <li>
               <Link href="/" className="block transition hover:text-gray-700">
                 <span className="sr-only"> Home </span>
-
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4"
@@ -104,7 +102,6 @@ function FilesPage() {
                 </svg>
               </Link>
             </li>
-
             <li className="rtl:rotate-180">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +116,6 @@ function FilesPage() {
                 />
               </svg>
             </li>
-
             <li>
               <Link
                 href="/upload"
@@ -129,7 +125,6 @@ function FilesPage() {
                 Upload{" "}
               </Link>
             </li>
-
             <li className="rtl:rotate-180">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +139,6 @@ function FilesPage() {
                 />
               </svg>
             </li>
-
             <li>
               <a href="#" className="block transition hover:text-gray-700">
                 {" "}

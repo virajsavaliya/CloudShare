@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import FileInfo from '../../file-preview/[fileId]/_components/FileInfo';
 import FileShareForm from './_components/FileShareForm';
 import { ClipLoader } from 'react-spinners';
@@ -89,7 +89,7 @@ function FilePreview({ params }) {
   const [file, setFile] = useState(null);
   const [windowWidth, setWindowWidth] = useState(null);
 
-  const getFileInfo = async () => {
+  const getFileInfo = useCallback(async () => {
     try {
       const docRef = doc(db, 'uploadedFile', params.fileId);
       const docSnap = await getDoc(docRef);
@@ -101,7 +101,7 @@ function FilePreview({ params }) {
     } catch (error) {
       console.error('Error fetching document:', error);
     }
-  };
+  }, [db, params.fileId]);
 
   useEffect(() => {
     if (params?.fileId) {
@@ -134,8 +134,6 @@ function FilePreview({ params }) {
     <div className={`px-5 ${windowWidth <= 768 ? 'py-5' : 'py-10'}`}>
       <NavLocation />
       <FilePreviewTitle />
-
-
       <div className='grid grid-cols-1 md:grid-cols-2 mt-5'>
         <FileInfo file={file} />
         <FileShareForm file={file} onPasswordSave={onPasswordSave} />

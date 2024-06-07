@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useUser } from "@clerk/nextjs";
 import { db } from "../../../../../firebaseConfig";
 import {
@@ -18,13 +18,7 @@ function Recycle() {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (user) {
-      fetchFiles();
-    }
-  }, [user]);
-
-  const fetchFiles = async () => {
+  const fetchFiles = useCallback(async () => {
     try {
       const recycleBinRef = collection(db, "recycleBin");
       const q = query(
@@ -44,7 +38,13 @@ function Recycle() {
       console.error("Error fetching files:", error);
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      fetchFiles();
+    }
+  }, [user, fetchFiles]);
 
   const recoverFile = async (file) => {
     try {

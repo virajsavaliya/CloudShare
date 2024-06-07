@@ -58,7 +58,7 @@ function FilesPage() {
       await deleteDoc(doc(db, "uploadedFile", file.id));
 
       // Update state to reflect removal
-      setFiles((files) => files.filter((f) => f.id !== file.id));
+      setFiles((prevFiles) => prevFiles.filter((f) => f.id !== file.id));
 
       console.log("File moved to recycle bin");
     } catch (error) {
@@ -77,6 +77,7 @@ function FilesPage() {
       </div>
     );
   }
+
 
   const NavLocation = () => {
     return (

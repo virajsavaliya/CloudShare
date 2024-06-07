@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { db } from "../../../../../firebaseConfig";
@@ -57,7 +57,7 @@ function Recycle() {
       await deleteDoc(doc(db, "recycleBin", file.id));
 
       // Update state to reflect recovery
-      setFiles((files) => files.filter((f) => f.id !== file.id));
+      setFiles((prevFiles) => prevFiles.filter((f) => f.id !== file.id));
 
       console.log("File recovered successfully");
     } catch (error) {
@@ -71,7 +71,7 @@ function Recycle() {
       await deleteDoc(doc(db, "recycleBin", fileId));
 
       // Update state to reflect deletion
-      setFiles((files) => files.filter((file) => file.id !== fileId));
+      setFiles((prevFiles) => prevFiles.filter((file) => file.id !== fileId));
 
       console.log("File deleted permanently");
     } catch (error) {

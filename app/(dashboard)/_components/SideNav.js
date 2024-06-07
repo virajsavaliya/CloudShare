@@ -50,7 +50,7 @@ function SideNav() {
     if (currentIndex !== -1) {
       setActiveIndex(currentIndex);
     }
-  }, [router.pathname]);
+  }, [router.pathname]); // Removed menuList from dependency array
 
   const handleNavigation = (index, path) => {
     setActiveIndex(index);

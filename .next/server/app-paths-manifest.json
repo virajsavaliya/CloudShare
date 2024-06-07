@@ -1,5 +1,8 @@
 {
+  "/f/[fileId]/page": "app/f/[fileId]/page.js",
   "/page": "app/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/(dashboard)/(router)/files/page": "app/(dashboard)/(router)/files/page.js"
+  "/(dashboard)/(router)/files/page": "app/(dashboard)/(router)/files/page.js",
+  "/(dashboard)/(router)/recycle/page": "app/(dashboard)/(router)/recycle/page.js",
+  "/(dashboard)/(router)/upload/page": "app/(dashboard)/(router)/upload/page.js",
+  "/(dashboard)/(router)/upgrade/page": "app/(dashboard)/(router)/upgrade/page.js"
 }

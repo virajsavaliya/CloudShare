@@ -4,7 +4,7 @@ import { AlignJustify } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
-import { MdHome, MdFolder, MdCloudUpload, MdShield } from "react-icons/md";
+import { MdHome, MdFolder, MdCloudUpload, MdShield, MdBlind, MdRecycling } from "react-icons/md";
 
 function TopHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -52,6 +52,12 @@ function TopHeader() {
               <div className="flex items-center">
                 <MdShield className="mr-2 text-lg" /> {/* Increased icon size */}
                 <span className="text-lg">Upgrade</span> {/* Increased text size */}
+              </div>
+            </Link>
+            <Link href="/recycle" onClick={closeMenu} className="menu-item">
+              <div className="flex items-center">
+                <MdRecycling className="mr-2 text-lg" /> {/* Increased icon size */}
+                <span className="text-lg">Recycle</span> {/* Increased text size */}
               </div>
             </Link>
           </nav>

@@ -1,20 +1,13 @@
 "use client";
-
-import {
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  useAuth,
-} from "@clerk/nextjs";
-import React, { useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import FilesPage from './_components/FilesPage';
+import { SignInButton, SignedIn, SignedOut, useAuth } from "@clerk/nextjs";
+import React, { useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import FilesPage from "./_components/FilesPage";
 
 function Files() {
   const { isLoaded, userId } = useAuth();
   const router = useRouter();
-  const pathname = usePathname(); 
-
+  const pathname = usePathname();
 
   useEffect(() => {
     if (isLoaded && !userId) {
@@ -23,13 +16,8 @@ function Files() {
     }
   }, [isLoaded, userId, router, pathname]);
 
-
-
-
   return (
-    
     <div>
-      
       <SignedIn>
         <FilesPage />
       </SignedIn>
@@ -39,8 +27,6 @@ function Files() {
       </SignedOut>
     </div>
   );
-  
 }
-
 
 export default Files;

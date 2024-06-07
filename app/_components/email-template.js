@@ -42,6 +42,7 @@ export function EmailTemplate({ response }) {
             display: inline-block;
             background-color: #007bff;
             color: #ffffff; /* Text color set to white */
+            text-color:#ffffff;
             padding: 10px 20px;
             border-radius: 4px;
             text-decoration: none;
@@ -80,7 +81,7 @@ export function EmailTemplate({ response }) {
               </div>
             </div>
             <div class="paragraph">*Access and download the file at your own risk.</div>
-            <div class="paragraph">You can also share the file with CloudShare Web.</div>
+            <div class="paragraph">You can also share the file with cloud-share-one.vercel.app.</div>
             <div class="row" style="padding: 0;">
               <div class="column" style="max-width: 100%;">
                 <a href="${response.shortUrl}" class="button">Click To Download</a>
@@ -91,6 +92,9 @@ export function EmailTemplate({ response }) {
           </div>
           <div class="footer">
             Copyright ©2024 All rights reserved | CloudShare | viraj-savaliya.web.app
+            <div>
+              *Do not reply. This email address is for outgoing emails only.
+            </div>
           </div>
         </div>
       </body>

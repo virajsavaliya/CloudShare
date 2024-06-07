@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { db } from "../../../../../firebaseConfig";
@@ -10,10 +11,9 @@ import {
   doc,
   setDoc,
 } from "firebase/firestore";
-import Link from "next/link";
 import { ClipLoader } from "react-spinners";
 
-function FilesPage() {
+function Recycle() {
   const { user } = useUser();
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,9 +26,9 @@ function FilesPage() {
 
   const fetchFiles = async () => {
     try {
-      const filesRef = collection(db, "uploadedFile");
+      const recycleBinRef = collection(db, "recycleBin");
       const q = query(
-        filesRef,
+        recycleBinRef,
         where("userEmail", "==", user?.primaryEmailAddress.emailAddress)
       );
       const querySnapshot = await getDocs(q);
@@ -46,28 +46,37 @@ function FilesPage() {
     }
   };
 
-  const removeFile = async (file) => {
+  const recoverFile = async (file) => {
     try {
-      // Move file to recycle bin with the same ID
-      await setDoc(doc(db, "recycleBin", file.id), {
+      // Move file back to uploadedFile collection
+      await setDoc(doc(db, "uploadedFile", file.id), {
         ...file,
-        removedAt: new Date(),
       });
 
-      // Remove file from uploadedFile collection
-      await deleteDoc(doc(db, "uploadedFile", file.id));
+      // Remove file from recycleBin collection
+      await deleteDoc(doc(db, "recycleBin", file.id));
 
-      // Update state to reflect removal
+      // Update state to reflect recovery
       setFiles((files) => files.filter((f) => f.id !== file.id));
 
-      console.log("File moved to recycle bin");
+      console.log("File recovered successfully");
     } catch (error) {
-      console.error("Error moving file to recycle bin:", error);
+      console.error("Error recovering file:", error);
     }
   };
 
-  const openFileInNewTab = (fileUrl) => {
-    window.open(fileUrl, "_blank");
+  const deleteFile = async (fileId) => {
+    try {
+      // Remove file from recycleBin collection
+      await deleteDoc(doc(db, "recycleBin", fileId));
+
+      // Update state to reflect deletion
+      setFiles((files) => files.filter((file) => file.id !== fileId));
+
+      console.log("File deleted permanently");
+    } catch (error) {
+      console.error("Error deleting file:", error);
+    }
   };
 
   if (loading) {
@@ -78,88 +87,10 @@ function FilesPage() {
     );
   }
 
-  const NavLocation = () => {
-    return (
-      <div className="hidden md:block">
-        <nav aria-label="Breadcrumb">
-          <ol className="flex items-center gap-1 text-sm text-gray-600">
-            <li>
-              <Link href="/" className="block transition hover:text-gray-700">
-                <span className="sr-only"> Home </span>
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                  />
-                </svg>
-              </Link>
-            </li>
-
-            <li className="rtl:rotate-180">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </li>
-
-            <li>
-              <Link
-                href="/upload"
-                className="block transition hover:text-gray-700"
-              >
-                {" "}
-                Upload{" "}
-              </Link>
-            </li>
-
-            <li className="rtl:rotate-180">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </li>
-
-            <li>
-              <a href="#" className="block transition hover:text-gray-700">
-                {" "}
-                Files{" "}
-              </a>
-            </li>
-          </ol>
-        </nav>
-      </div>
-    );
-  };
-
-  const FilesTitle = () => {
+  const RecycleBinTitle = () => {
     return (
       <div className="text-center mb-8 mt-10">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Files</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">Recycle Bin</h1>
         <hr className="border-b-2 border-gray-300 w-16 mx-auto" />
       </div>
     );
@@ -238,16 +169,16 @@ function FilesPage() {
                     <td className="p-3 md:p-6 border-b text-center">
                       <div className="flex justify-center">
                         <button
-                          onClick={() => openFileInNewTab(file.fileUrl)}
+                          onClick={() => recoverFile(file)}
                           className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mr-4"
                         >
-                          Open
+                          Recover
                         </button>
                         <button
-                          onClick={() => removeFile(file)}
+                          onClick={() => deleteFile(file.id)}
                           className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
                         >
-                          Recycle
+                          Delete
                         </button>
                       </div>
                     </td>
@@ -277,16 +208,16 @@ function FilesPage() {
                   </span>
                   <span className="flex space-x-2">
                     <button
-                      onClick={() => openFileInNewTab(file.fileUrl)}
+                      onClick={() => recoverFile(file)}
                       className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
                     >
-                      Open
+                      Recover
                     </button>
                     <button
-                      onClick={() => removeFile(file)}
+                      onClick={() => deleteFile(file.id)}
                       className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
                     >
-                      Recycle
+                      Delete
                     </button>
                   </span>
                 </div>
@@ -318,11 +249,10 @@ function FilesPage() {
 
   return (
     <div className="p-5 px-8 md:px-8">
-      <NavLocation />
-      <FilesTitle />
+      <RecycleBinTitle />
       <Tables />
     </div>
   );
 }
 
-export default FilesPage;
+export default Recycle;

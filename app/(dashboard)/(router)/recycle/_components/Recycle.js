@@ -149,7 +149,10 @@ function Recycle() {
               </svg>
             </li>
             <li>
-              <a href="/recycle" className="block transition hover:text-gray-700">
+              <a
+                href="/recycle"
+                className="block transition hover:text-gray-700"
+              >
                 {" "}
                 Recycle{" "}
               </a>
@@ -176,25 +179,48 @@ function Recycle() {
         "image/png": ".png",
         "image/svg+xml": ".svg",
         "image/gif": ".gif",
+        "image/heic": ".heic",
+        "image/heif": ".heif",
+        "image/dng": ".dng",
         "application/pdf": ".pdf",
-        "application/zip": "zip",
-        "application/x-rar-compressed": "zip",
-        "application/x-7z-compressed": "zip",
-        "application/x-tar": "zip",
-        "application/x-gzip": "zip",
-        "application/x-zip-compressed": "zip",
+        "application/zip": ".zip",
+        "application/x-rar-compressed": ".rar",
+        "application/x-7z-compressed": ".7z",
+        "application/x-tar": ".tar",
+        "application/x-gzip": ".gz",
+        "application/x-zip-compressed": ".zip",
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
           ".docx",
         "application/msword": ".doc",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
-          ".csv",
-        "application/vnd.ms-excel": ".csv",
+          ".xlsx",
+        "application/vnd.ms-excel": ".xls",
         "application/vnd.openxmlformats-officedocument.presentationml.presentation":
-          ".ppt",
+          ".pptx",
         "application/vnd.ms-powerpoint": ".ppt",
-        "application/msaccess": ".accda",
+        "application/msaccess": ".accdb",
         "application/vnd.ms-project": ".mpp",
         "application/vnd.visio": ".vsdx",
+        "video/mp4": ".mp4",
+        "video/x-msvideo": ".avi",
+        "video/x-ms-wmv": ".wmv",
+        "video/x-matroska": ".mkv",
+        "video/webm": ".webm",
+        "video/quicktime": ".mov",
+        "video/mpeg": ".mpeg",
+        "video/ogg": ".ogv",
+        "video/3gpp": ".3gp",
+        "video/3gpp2": ".3g2",
+        "video/x-flv": ".flv",
+        "video/x-m4v": ".m4v",
+        "audio/mpeg": ".mp3",
+        "audio/wav": ".wav",
+        "audio/ogg": ".ogg",
+        "audio/flac": ".flac",
+        "audio/aac": ".aac",
+        "audio/mp4": ".m4a",
+        "audio/amr": ".amr",
+        "audio/x-ms-wma": ".wma",
       };
 
       return fileTypeMap[fileType] || fileType;
@@ -322,7 +348,7 @@ function Recycle() {
 
   return (
     <div className="p-5 px-8 md:px-8">
-      <NavLocation/>
+      <NavLocation />
       <RecycleBinTitle />
       <Tables />
     </div>

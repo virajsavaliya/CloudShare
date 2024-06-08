@@ -4,7 +4,9 @@ import { AlignJustify } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
-import { MdHome, MdFolder, MdCloudUpload, MdShield, MdBlind, MdRecycling } from "react-icons/md";
+import { FaShield } from "react-icons/fa6";
+import { FaHome,FaRegTrashAlt,FaCloudUploadAlt,FaFolder } from "react-icons/fa";
+
 
 function TopHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,31 +34,31 @@ function TopHeader() {
           <nav className="menu">
             <Link href="/" onClick={closeMenu} className="menu-item">
               <div className="flex items-center">
-                <MdHome className="mr-2 text-lg" /> {/* Increased icon size */}
+                <FaHome className="mr-2 text-lg" /> {/* Increased icon size */}
                 <span className="text-lg">Home</span> {/* Increased text size */}
               </div>
             </Link>
             <Link href="/files" onClick={closeMenu} className="menu-item">
               <div className="flex items-center">
-                <MdFolder className="mr-2 text-lg" /> {/* Increased icon size */}
+                <FaFolder className="mr-2 text-lg" /> {/* Increased icon size */}
                 <span className="text-lg">Files</span> {/* Increased text size */}
               </div>
             </Link>
             <Link href="/upload" onClick={closeMenu} className="menu-item">
               <div className="flex items-center">
-                <MdCloudUpload className="mr-2 text-lg" /> {/* Increased icon size */}
+                <FaCloudUploadAlt className="mr-2 text-lg" /> {/* Increased icon size */}
                 <span className="text-lg">Upload</span> {/* Increased text size */}
               </div>
             </Link>
             <Link href="/upgrade" onClick={closeMenu} className="menu-item">
               <div className="flex items-center">
-                <MdShield className="mr-2 text-lg" /> {/* Increased icon size */}
+                <FaShield className="mr-2 text-lg" /> {/* Increased icon size */}
                 <span className="text-lg">Upgrade</span> {/* Increased text size */}
               </div>
             </Link>
             <Link href="/recycle" onClick={closeMenu} className="menu-item">
               <div className="flex items-center">
-                <MdRecycling className="mr-2 text-lg" /> {/* Increased icon size */}
+                <FaRegTrashAlt className="mr-2 text-lg" /> {/* Increased icon size */}
                 <span className="text-lg">Recycle</span> {/* Increased text size */}
               </div>
             </Link>

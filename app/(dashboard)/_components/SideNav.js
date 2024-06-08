@@ -1,4 +1,4 @@
-import { File, Home, Recycle, Shield, Upload } from "lucide-react";
+import { File, Home, Shield, Trash2, Upload } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
@@ -33,7 +33,7 @@ function SideNav() {
     {
       id: 5,
       name: "Recycle Bin",
-      icon: Recycle,
+      icon: Trash2,
       path: "/recycle",
     },
   ], []);

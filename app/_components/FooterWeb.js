@@ -1,6 +1,6 @@
 import React from "react";
 
-function footer() {
+function FooterWeb() {
   return (
     <footer className="bg-gray-700 text-white py-4">
       <div className="container mx-auto text-center">
@@ -15,4 +15,4 @@ function footer() {
   );
 }
 
-export default footer;
+export default FooterWeb;

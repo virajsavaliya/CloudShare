@@ -79,6 +79,28 @@ function Recycle() {
     }
   };
 
+  const emptyBin = async () => {
+    try {
+      const recycleBinRef = collection(db, "recycleBin");
+      const q = query(
+        recycleBinRef,
+        where("userEmail", "==", user?.primaryEmailAddress.emailAddress)
+      );
+      const querySnapshot = await getDocs(q);
+
+      const deletePromises = querySnapshot.docs.map((doc) => deleteDoc(doc.ref));
+
+      await Promise.all(deletePromises);
+
+      // Update state to reflect deletion of all files
+      setFiles([]);
+
+      console.log("Recycle bin emptied successfully");
+    } catch (error) {
+      console.error("Error emptying recycle bin:", error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -350,6 +372,14 @@ function Recycle() {
     <div className="p-5 px-8 md:px-8">
       <NavLocation />
       <RecycleBinTitle />
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={emptyBin}
+          className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+        >
+          Empty Bin
+        </button>
+      </div>
       <Tables />
     </div>
   );

@@ -53,7 +53,7 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
     "audio/aac",
     "audio/mp4",
     "audio/amr",
-    "audio/x-ms-wma"  
+    "audio/x-ms-wma",
   ];
 
   const onFileSelect = (file) => {
@@ -97,6 +97,10 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
     onFileSelect(droppedFile);
   };
 
+  const handleUploadClick = () => {
+    uploadBtnClick(file);
+  };
+
   return (
     <div
       className={`flex flex-col md:flex-row items-center justify-center w-full space-y-4 md:space-y-0 md:space-x-4 ${
@@ -132,11 +136,12 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
           </svg>
           <p className="mb-2 text-lg md:text-2xl text-gray-500 dark:text-gray-400">
             <span className="font-semibold">Click to upload</span> or
-            <strong className="text-primary">drag</strong> and{" "}
-            <strong className="text-primary">drop</strong>
+            <strong className="text-primary"> drag</strong> and{" "}
+            <strong className="text-primary"> drop</strong>
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            SVG, PNG, JPG, GIF, HEIC, DNG, PDF, ZIP, PPT, DOCS, CSV, video, audio, or other supported files (Max Size: 50MB)
+            SVG, PNG, JPG, GIF, HEIC, DNG, PDF, ZIP, PPT, DOCS, CSV, video,
+            audio, or other supported files (Max Size: 50MB)
           </p>
         </div>
         <input
@@ -144,7 +149,7 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
           type="file"
           className="hidden"
           ref={fileInputRef}
-          accept={allowedFileTypes.join(',')}
+          accept={allowedFileTypes.join(",")}
           onChange={(event) => onFileSelect(event.target.files[0])}
           disabled={isUploading}
         />
@@ -152,7 +157,8 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
       <div className="w-full md:w-1/2 flex flex-col items-center border border-gray-300 rounded-lg p-4 bg-white shadow-md h-64">
         <h2 className="text-xl font-semibold mb-1 text-center">Preview</h2>
         <hr className="border-b-2 border-gray-300 w-16 mx-auto mb-4" />
-        {errorMsg && <AlertMsg msg={errorMsg} />}
+        {errorMsg &&  <AlertMsg msg={errorMsg} />
+        }
         {file ? (
           <>
             <FilePreview file={file} removeFile={removeFile} />
@@ -162,12 +168,18 @@ function UploadForm({ uploadBtnClick, isUploading, progress }) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="p-2 bg-primary text-white w-full rounded-full mt-5"
-                onClick={() => uploadBtnClick(file)}
+                onClick={handleUploadClick}
+                disabled={isUploading} // Disable the button when uploading
               >
                 Upload
               </motion.button>
             )}
             {isUploading && <ProgressBar progress={progress} />}
+            {isUploading && progress === 100 && (
+              <div className="mt-5">
+                <p className="text-gray-700">Uploading...</p>
+              </div>
+            )}
           </>
         ) : (
           <p className="text-gray-500 text-center">No file selected</p>

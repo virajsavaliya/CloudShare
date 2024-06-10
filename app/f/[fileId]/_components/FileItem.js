@@ -21,7 +21,7 @@ function FileItem({ file }) {
                     <div className='flex justify-center items-center mt-4'>
                         <div className='relative w-[120px] h-[120px]'>
                             <Image
-                                src='/download-file.gif'
+                                src='/download-file.webp'
                                 alt='Download File'
                                 layout='fill'
                                 objectFit='contain'

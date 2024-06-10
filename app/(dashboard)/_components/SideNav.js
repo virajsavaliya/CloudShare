@@ -1,4 +1,4 @@
-import { File, Home, Shield, Trash2, Upload } from "lucide-react";
+import { File, Home,  LucideHelpCircle,  Shield, Trash2, Upload} from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
@@ -36,6 +36,12 @@ function SideNav() {
       icon: Trash2,
       path: "/recycle",
     },
+    {
+      id: 6,
+      name: "Help",
+      icon: LucideHelpCircle,
+      path: "/help",
+    },
   ], []);
 
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -62,7 +68,7 @@ function SideNav() {
       <div>
         <div className="pl-11 py-2 border-b">
           <Image
-            src="/logo.png"
+            src="/logo.webp"
             width={150}
             height={200}
             alt="Logo"

@@ -28,6 +28,7 @@
     "react-pdf": "^9.0.0",
     "react-spinners": "^0.13.8",
     "resend": "^3.2.0",
+    "styled-components": "^6.1.11",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
   },

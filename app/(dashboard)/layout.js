@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import SideNav from './_components/SideNav';
 import TopHeader from './_components/TopHeader';
-import Footer from '../_components/Footer';
+import Footer from '../_components/FooterWeb';
 
 function Layout({ children }) {
   const [isSmallScreen, setIsSmallScreen] = useState(false);

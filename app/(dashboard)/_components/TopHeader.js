@@ -1,11 +1,11 @@
 "use client"
 import { UserButton } from "@clerk/nextjs";
-import { AlignJustify } from "lucide-react";
+import { AlignJustify, LucideHelpCircle } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
 import { FaShield } from "react-icons/fa6";
-import { FaHome,FaRegTrashAlt,FaCloudUploadAlt,FaFolder } from "react-icons/fa";
+import { FaHome,FaRegTrashAlt,FaCloudUploadAlt,FaFolder, FaQuestionCircle } from "react-icons/fa";
 
 
 function TopHeader() {
@@ -26,7 +26,7 @@ function TopHeader() {
           <button onClick={toggleMenu}>
             <AlignJustify size={24} /> {/* Increased icon size */}
           </button>
-          <Image src="/logo.png" width={150} height={100} alt="Logo" />
+          <Image src="/logo.webp" width={150} height={100} alt="Logo" />
           <UserButton />
         </div>
 
@@ -60,6 +60,12 @@ function TopHeader() {
               <div className="flex items-center">
                 <FaRegTrashAlt className="mr-2 text-lg" /> {/* Increased icon size */}
                 <span className="text-lg">Recycle</span> {/* Increased text size */}
+              </div>
+            </Link>
+            <Link href="/help" onClick={closeMenu} className="menu-item">
+              <div className="flex items-center">
+                <FaQuestionCircle className="mr-2 text-lg" /> {/* Increased icon size */}
+                <span className="text-lg">Help</span> {/* Increased text size */}
               </div>
             </Link>
           </nav>

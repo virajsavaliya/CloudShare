@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 function FileInfo({ file }) {
-  
   const [fileType, setFileType] = useState();
 
   useEffect(() => {
@@ -15,7 +14,7 @@ function FileInfo({ file }) {
   return file && (
     <div className='text-center border flex justify-center m-5 flex-col items-center p-4 rounded-md border-gray-300'>
       <Image
-        src={fileType === 'image' ? file.fileUrl : '/file.png'}
+        src={fileType === 'image' ? file.fileUrl : '/file.webp'}
         width={300}
         height={300}
         alt={file.fileName}

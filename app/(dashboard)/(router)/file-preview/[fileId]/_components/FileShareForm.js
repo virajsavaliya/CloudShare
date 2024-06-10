@@ -1,25 +1,28 @@
-import React, { useState } from "react";
-import { Copy, CheckCircle } from "lucide-react"; // Assuming 'CheckCircle' is the icon for the green tick
-import GlobalApi from "./../../../../../_utils/GlobalApi";
-import { useUser } from "@clerk/nextjs";
-import { FaFrownOpen, FaRegSmile } from "react-icons/fa";
+import React, { useState } from 'react';
+import { Copy, CheckCircle } from 'lucide-react'; // Assuming 'CheckCircle' is the icon for the green tick
+import GlobalApi from './../../../../../_utils/GlobalApi';
+import { useUser } from '@clerk/nextjs';
+import { FaRegSmile } from 'react-icons/fa';
+import ClipLoader from 'react-spinners/ClipLoader'; // Add this import for the loader
 
 function FileShareForm({ file, onPasswordSave }) {
   const [isPasswordEnable, setIsEnablePassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const { user } = useUser();
   const [menuOpen, setMenuOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [passwordSaved, setPasswordSaved] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [loading, setLoading] = useState(false); // Add this state variable
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const SendEmail = () => {
+    setLoading(true); // Set loading to true when email sending starts
     const data = {
       emailToSend: email,
       userName: user?.fullName,
@@ -31,6 +34,7 @@ function FileShareForm({ file, onPasswordSave }) {
     GlobalApi.SendEmail(data).then((resp) => {
       console.log(resp);
       setShowPopup(true);
+      setLoading(false); // Set loading to false when email sending is done
       setTimeout(() => setShowPopup(false), 2000);
     });
   };
@@ -38,26 +42,25 @@ function FileShareForm({ file, onPasswordSave }) {
   const handleCopy = () => {
     if (file && file.shortUrl) {
       if (navigator.clipboard) {
-        navigator.clipboard
-          .writeText(file.shortUrl)
+        navigator.clipboard.writeText(file.shortUrl)
           .then(() => {
             setCopied(true);
             setTimeout(() => setCopied(false), 800);
-            console.log("URL copied to clipboard!");
+            console.log('URL copied to clipboard!');
           })
           .catch((error) => {
-            console.error("Failed to copy URL to clipboard:", error);
+            console.error('Failed to copy URL to clipboard:', error);
           });
       } else {
-        const tempInput = document.createElement("input");
+        const tempInput = document.createElement('input');
         tempInput.value = file.shortUrl;
         document.body.appendChild(tempInput);
         tempInput.select();
-        document.execCommand("copy");
+        document.execCommand('copy');
         document.body.removeChild(tempInput);
         setCopied(true);
         setTimeout(() => setCopied(false), 800);
-        console.log("URL copied to clipboard (fallback)");
+        console.log('URL copied to clipboard (fallback)');
       }
     }
   };
@@ -75,19 +78,15 @@ function FileShareForm({ file, onPasswordSave }) {
   };
 
   return (
-    <div
-      className={`flex flex-col gap-2 border-blue-300 ${
-        menuOpen ? "w-full" : ""
-      }`}
-    >
+    <div className={`flex flex-col gap-2 border-blue-300 ${menuOpen ? 'w-full' : ''}`}>
       <div>
-        <label className="text-[14px] text-gray-500">Short Url</label>
-        <div className="relative flex items-center p-2 border rounded-md">
+        <label className='text-[14px] text-gray-500'>Short Url</label>
+        <div className='relative flex items-center p-2 border rounded-md'>
           <input
-            type="text"
-            value={file.shortUrl || ""}
+            type='text'
+            value={file.shortUrl || ''}
             disabled
-            className="flex-grow disabled:text-gray-500 bg-transparent outline-none mr-2"
+            className='flex-grow disabled:text-gray-500 bg-transparent outline-none mr-2'
           />
           {copied ? (
             <div className="text-green-500">
@@ -95,41 +94,36 @@ function FileShareForm({ file, onPasswordSave }) {
             </div>
           ) : (
             <Copy
-              className="text-gray-400 cursor-pointer hover:text-gray-600"
+              className='text-gray-400 cursor-pointer hover:text-gray-600'
               onClick={handleCopy}
             />
           )}
         </div>
 
-        <div className="gap-3 flex mt-5">
+        <div className='gap-3 flex mt-5'>
           <input
-            type="checkbox"
+            type='checkbox'
             onChange={(e) => setIsEnablePassword(e.target.checked)}
           />
           <label>Enable Password</label>
         </div>
 
         {isPasswordEnable && (
-          <div className="flex flex-col md:flex-row gap-3 items-center">
-            <div className="border rounded-md w-full p-2">
+          <div className='flex flex-col md:flex-row gap-3 items-center'>
+            <div className='border rounded-md w-full p-2'>
               <input
-                type="password"
+                type='password'
                 value={password}
-                className={`disabled:text-gray-500 bg-transparent outline-none w-full ${
-                  isTyping ? "animate-typing" : ""
-                }`}
+                className={`disabled:text-gray-500 bg-transparent outline-none w-full ${isTyping ? 'animate-typing' : ''}`}
                 onChange={handleTyping}
               />
             </div>
             {!passwordSaved ? (
               <button
-                className="p-2 bg-primary text-white rounded-md disabled:bg-gray-300 hover:bg-blue-500"
+                className='p-2 bg-primary text-white rounded-md disabled:bg-gray-300 hover:bg-blue-500'
                 disabled={password.length < 3}
                 onClick={() => handlePasswordSave(password)}
-              >
-                {" "}
-                Save{" "}
-              </button>
+              > Save </button>
             ) : (
               <div className="text-blue-500 animate-bounce">
                 <CheckCircle size={25} />
@@ -138,24 +132,23 @@ function FileShareForm({ file, onPasswordSave }) {
           </div>
         )}
 
-        <div className="border rounded-md p-4 mt-5">
-          <label className="text-[14px] text-gray-500 ">
-            Send File to Email
-          </label>
-          <div className="border rounded-md p-2">
+        <div className='border rounded-md p-4 mt-5'>
+          <label className='text-[14px] text-gray-500 '>Send File to Email</label>
+          <div className='border rounded-md p-2'>
             <input
               type="email"
-              placeholder="example@gmail.com"
-              className="bg-transparent outline-none w-full"
+              placeholder='example@gmail.com'
+              className='bg-transparent outline-none w-full'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <button
-            className="p-2 disabled:bg-gray-300 bg-primary text-white hover:bg-blue-600 w-full mt-2 rounded-md"
+            className='p-2 disabled:bg-gray-300 bg-primary text-white hover:bg-blue-600 w-full mt-2 rounded-md'
             onClick={SendEmail}
+            disabled={loading} // Disable button while loading
           >
-            Send Email
+            {loading ? <ClipLoader size={20} color={"#ffffff"} /> : "Send Email"} 
           </button>
         </div>
       </div>
@@ -165,8 +158,7 @@ function FileShareForm({ file, onPasswordSave }) {
 
           <div className="fixed center bg-white border border-gray-300 rounded-lg shadow-lg p-4 max-w-xs">
             <p className="text font-semibold flex items-center">
-              <FaRegSmile className="inline-block mr-2" /> Email Sended to{" "}
-              {email} Successfully.
+              <FaRegSmile className="inline-block mr-2" /> Email Sended to {email} Successfully.
             </p>
           </div>
         </div>

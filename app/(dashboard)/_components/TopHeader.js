@@ -1,12 +1,9 @@
-"use client"
 import { UserButton } from "@clerk/nextjs";
-import { AlignJustify, LucideHelpCircle } from "lucide-react";
+import { useState } from "react";
 import Image from "next/image";
-import React, { useState } from "react";
 import Link from "next/link";
-import { FaShield } from "react-icons/fa6";
-import { FaHome,FaRegTrashAlt,FaCloudUploadAlt,FaFolder, FaQuestionCircle } from "react-icons/fa";
-
+import { FaHome, FaRegTrashAlt, FaCloudUploadAlt, FaFolder, FaQuestionCircle, FaBars, FaTimes } from "react-icons/fa"; // Added FaTimes for close icon
+import { IconContext } from "react-icons";
 
 function TopHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,7 +21,9 @@ function TopHeader() {
       <div className="relative md:hidden">
         <div className="flex px-4 py-1 border-b items-center justify-between">
           <button onClick={toggleMenu}>
-            <AlignJustify size={24} /> {/* Increased icon size */}
+            <IconContext.Provider value={{ size: "24px", className: "menu-icon" }}>
+              {menuOpen ? <FaTimes /> : <FaBars />} {/* Toggle icon based on menu state */}
+            </IconContext.Provider>
           </button>
           <Image src="/logo.webp" width={150} height={100} alt="Logo" />
           <UserButton />
@@ -34,38 +33,32 @@ function TopHeader() {
           <nav className="menu">
             <Link href="/" onClick={closeMenu} className="menu-item">
               <div className="flex items-center">
-                <FaHome className="mr-2 text-lg" /> {/* Increased icon size */}
-                <span className="text-lg">Home</span> {/* Increased text size */}
+                <FaHome className="mr-2 text-lg" />
+                <span className="text-lg">Home</span>
               </div>
             </Link>
             <Link href="/files" onClick={closeMenu} className="menu-item">
               <div className="flex items-center">
-                <FaFolder className="mr-2 text-lg" /> {/* Increased icon size */}
-                <span className="text-lg">Files</span> {/* Increased text size */}
+                <FaFolder className="mr-2 text-lg" />
+                <span className="text-lg">Files</span>
               </div>
             </Link>
             <Link href="/upload" onClick={closeMenu} className="menu-item">
               <div className="flex items-center">
-                <FaCloudUploadAlt className="mr-2 text-lg" /> {/* Increased icon size */}
-                <span className="text-lg">Upload</span> {/* Increased text size */}
+                <FaCloudUploadAlt className="mr-2 text-lg" />
+                <span className="text-lg">Upload</span>
               </div>
             </Link>
-            <Link href="/upgrade" onClick={closeMenu} className="menu-item">
+            <Link href="/recycle" onClick={closeMenu} className="menu-item"> {/* Added Recycle link */}
               <div className="flex items-center">
-                <FaShield className="mr-2 text-lg" /> {/* Increased icon size */}
-                <span className="text-lg">Upgrade</span> {/* Increased text size */}
-              </div>
-            </Link>
-            <Link href="/recycle" onClick={closeMenu} className="menu-item">
-              <div className="flex items-center">
-                <FaRegTrashAlt className="mr-2 text-lg" /> {/* Increased icon size */}
-                <span className="text-lg">Recycle</span> {/* Increased text size */}
+                <FaRegTrashAlt className="mr-2 text-lg" />
+                <span className="text-lg">Recycle</span>
               </div>
             </Link>
             <Link href="/help" onClick={closeMenu} className="menu-item">
               <div className="flex items-center">
-                <FaQuestionCircle className="mr-2 text-lg" /> {/* Increased icon size */}
-                <span className="text-lg">Help</span> {/* Increased text size */}
+                <FaQuestionCircle className="mr-2 text-lg" />
+                <span className="text-lg">Help</span>
               </div>
             </Link>
           </nav>

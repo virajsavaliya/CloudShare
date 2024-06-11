@@ -128,6 +128,7 @@ export default function HelpPage() {
       question: "How do you send a file?",
       answer:
         "To initiate the file sending process, first, log in to your account. Then, click on the upload button located on the menu bar, followed by selecting the option to send files.",
+        videoLink:'https://www.youtube.com/embed/L-5D2Q-eSTw?si=DHmdVciRW-ntyD8F'
     },
     {
       question: "How can file history be displayed?",
@@ -143,7 +144,7 @@ export default function HelpPage() {
       question: "Can I set a password for my files?",
       answer:
         "Yes, you can send password-protected files. This feature is available when you upload a file and go to the file preview page. At that page, there will be a password toggle. Enable it, enter the password of your choice, and click on save.",
-        videoLink: "https://www.youtube.com/embed/VIDEO_ID_2",
+        videoLink: "https://www.youtube.com/embed/7jVvI77tALI?si=9BC3VkACgk2J5EYJ",
     },
     {
       question: "Can my data be encrypted?",
@@ -155,21 +156,21 @@ export default function HelpPage() {
   const supportFAQs = [
     {
       question: "How can I reset my password?",
-      answer:
-        'To reset your password, please follow these steps: Go to the "Your Profile" logo. Click on "Manage Password." Then click on "Security." Click on "Set Password." Enter the new password and confirm it, then click on the "Save" button. For a clearer understanding, watch the video.',
-      videoLink: "https://www.youtube.com/embed/VIDEO_ID_2",
+      answer: 'To reset your password, please follow these steps: Go to the "Your Profile" logo. Click on "Manage Password." Then click on "Security." Click on "Set Password." Enter the new password and confirm it, then click on the "Save" button. For a clearer understanding, watch the video.',
+      videoLink: 'https://www.youtube.com/embed/Z8VRSGW2wKc?si=Ta7FbHTSx2xooqOI '
     },
+    
     {
       question: "How can you delete and recover files?",
       answer:
         'To delete files, select the "Files" option from the menu bar where you can find the delete button. To recover files, select the recycle bin from the menu bar, where you will see both the delete and recover file options. Clicking on the delete button will permanently delete the file, while clicking on the recover button will restore the file, making it visible again in the files menu.',
-      videoLink: "https://www.youtube.com/embed/VIDEO_ID_2",
+      videoLink: "https://www.youtube.com/embed/Y5xDveCrw_U?si=l5rXK5i_pN2Pz412",
     },
     {
       question: "What issue are you having with file or email sending?",
       answer:
         "If you have any issues, check the email address you entered and your Gmail spam folder. If you still don't receive the message, contact us at cloudsharing.fileshare@gmail.com, and we'll respond within 48 hours.",
-      videoLink: "https://www.youtube.com/embed/VIDEO_ID_2",
+      videoLink: "https://www.youtube.com/embed/V6xbgSudX3o?si=NZiR40URBPm4jMUB",
     },
     
   ];

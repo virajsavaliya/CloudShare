@@ -1,4 +1,5 @@
 // next.config.js
+
 module.exports = {
   images: {
     domains: ['firebasestorage.googleapis.com'],
@@ -6,7 +7,7 @@ module.exports = {
   experimental: {
     runtime: 'experimental-edge',
   },
-    devIndicators: {
-      autoPrerender: false,
-    },
-  };
+  devIndicators: {
+    autoPrerender: false,
+  },
+};

@@ -1,5 +1,7 @@
 {
-  "/page": "app/page.js",
-  "/(dashboard)/(router)/help/page": "app/(dashboard)/(router)/help/page.js",
-  "/(dashboard)/(router)/files/page": "app/(dashboard)/(router)/files/page.js"
+  "/f/[fileId]/page": "app/f/[fileId]/page.js",
+  "/(dashboard)/(router)/files/page": "app/(dashboard)/(router)/files/page.js",
+  "/(dashboard)/(router)/upload/page": "app/(dashboard)/(router)/upload/page.js",
+  "/(dashboard)/(router)/recycle/page": "app/(dashboard)/(router)/recycle/page.js",
+  "/(dashboard)/(router)/file-preview/[fileId]/page": "app/(dashboard)/(router)/file-preview/[fileId]/page.js"
 }

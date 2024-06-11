@@ -139,7 +139,17 @@ export default function HelpPage() {
       answer:
         "Once a file is permanently deleted from the recycle bin, it cannot be recovered. However, if a file is deleted from the files page, it can still be recovered from the recycle bin.",
     },
-    // Add more FAQs as needed
+    {
+      question: "Can I set a password for my files?",
+      answer:
+        "Yes, you can send password-protected files. This feature is available when you upload a file and go to the file preview page. At that page, there will be a password toggle. Enable it, enter the password of your choice, and click on save.",
+        videoLink: "https://www.youtube.com/embed/VIDEO_ID_2",
+    },
+    {
+      question: "Can my data be encrypted?",
+      answer:
+        "Yes, your data is end-to-end encrypted and stored in our database system. You can send your private files without hesitation.",
+    },
   ];
 
   const supportFAQs = [
@@ -156,12 +166,12 @@ export default function HelpPage() {
       videoLink: "https://www.youtube.com/embed/VIDEO_ID_2",
     },
     {
-      question: "What issue are you encountering with file or email sending?",
+      question: "What issue are you having with file or email sending?",
       answer:
-        "If you encounter any issues, please double-check the email address you entered. If you still haven't received the message, please check your spam folder in Gmail. If the issue persists, contact us at cloudsharing.fileshare@gmail.com, and we will get back to you within 48 hours.",
+        "If you have any issues, check the email address you entered and your Gmail spam folder. If you still don't receive the message, contact us at cloudsharing.fileshare@gmail.com, and we'll respond within 48 hours.",
       videoLink: "https://www.youtube.com/embed/VIDEO_ID_2",
     },
-    // Add more FAQs as needed
+    
   ];
 
   const paymentFAQs = [

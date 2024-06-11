@@ -1,15 +1,5 @@
 {
   "pages": {
-    "/(dashboard)/(router)/files/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/(router)/files/page.js"
-    ],
-    "/(dashboard)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/layout.js"
-    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -21,30 +11,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/(dashboard)/(router)/upload/page": [
+    "/(dashboard)/(router)/files/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/(router)/upload/page.js"
+      "static/chunks/app/(dashboard)/(router)/files/page.js"
     ],
-    "/(dashboard)/(router)/file-preview/[fileId]/page": [
+    "/(dashboard)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/(router)/file-preview/[fileId]/page.js"
+      "static/chunks/app/(dashboard)/layout.js"
     ],
-    "/f/[fileId]/page": [
+    "/(dashboard)/(router)/help/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/f/[fileId]/page.js"
-    ],
-    "/(dashboard)/(router)/recycle/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/(router)/recycle/page.js"
-    ],
-    "/(dashboard)/(router)/upgrade/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/(router)/upgrade/page.js"
+      "static/chunks/app/(dashboard)/(router)/help/page.js"
     ]
   }
 }

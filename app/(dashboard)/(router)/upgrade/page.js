@@ -137,7 +137,7 @@ function Upgrade() {
                       d="M4.5 12.75l6 6 9-13.5"
                     />
                   </svg>
-                  <span className="text-gray-700">Send up to 2.5 MB</span>
+                  <span className="text-gray-700">Send up to 50 MB</span>
                 </li>
                 <li className="flex items-center gap-1">
                   <svg
